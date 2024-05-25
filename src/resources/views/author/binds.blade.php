@@ -16,17 +16,16 @@
         text-align: center;
     }
 </style>
-@section('title','index.blade.php')
+@section('title', 'binds.blade.php')
 
 @section('content')
+<p>Author</p>
 <table>
     <tr>
-        <th>Data</th>
+        <td> {{$item->id}} </td>
+        <td> {{$item->name}} </td>
+        <td> {{$item->age}} </td>
+        <td> {{$item->nationality}} </td>
     </tr>
-    @foreach ($authors as $author)
-    <tr>
-        <td>{{$author->getDetail()}}</td>
-    </tr>
-    @endforeach
 </table>
 @endsection
