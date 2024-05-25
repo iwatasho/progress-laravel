@@ -6,11 +6,6 @@ use Illuminate\Support\Facades\Schema;
 
 class CreateAuthorsTable extends Migration
 {
-    /**
-     * Run the migrations.
-     *
-     * @return void
-     */
     public function up()
     {
         Schema::create('authors', function (Blueprint $table) {
