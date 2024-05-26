@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 //Eloquentを使用できるようにAuthorモデルを読み込む
 use App\Models\Author;
+//フォームリクエストの読み込み
+use App\Http\Requests\AuthorRequest;
 
 
 class AuthorController extends Controller
@@ -16,36 +18,14 @@ class AuthorController extends Controller
         return view('index', ['authors' => $authors]);
     }
 
-    public function find()
-    {
-        return view('find', ['input' => '']);
-    }
-    public function search(Request $request)
-    {
-        $item = Author::where('name', $request->input)->first();
-        $param = [
-            'input' => $request->input,
-            'item' => $item
-        ];
-        return view('find', $param);
-    }
-
-    public function bind(Author $author)
-    {
-        $data = [
-            'item'=>$author,
-        ];
-        return view('author.binds', $data);
-    }
-
     // データ追加用ページの表示
     public function add()
     {
         return view('add');
     }
 
-    //データ追加機能
-    public function create(Request $request)
+    //追加機能
+    public function create(AuthorRequest $request)
     {
         $form = $request->all();
         Author::create($form);
@@ -60,7 +40,7 @@ class AuthorController extends Controller
     }
 
     //更新機能
-    public function update(Request $request)
+    public function update(AuthorRequest $request)
     {
         $form = $request->all();
         unset($form['_token']);
@@ -73,5 +53,23 @@ class AuthorController extends Controller
     {
         $author = Author::find($request->id);
         return view('delete', ['author' => $author]);
+    }
+
+    //削除機能
+    public function remove(Request $request)
+    {
+        Author::find($request->id)->delete();
+        return redirect('/');
+    }
+
+    public function verror()
+    {
+        return view('verror');
+    }
+
+    public function relate(Request $request)
+    {
+        $items = Author::all();
+        return view('author.index', ['items' => $items]);
     }
 }
