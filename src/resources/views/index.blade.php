@@ -16,7 +16,7 @@
         text-align: center;
     }
 </style>
-@section('title','index.blade.php')
+@section('title', 'index.blade.php')
 
 @section('content')
 <table>
@@ -25,8 +25,11 @@
     </tr>
     @foreach ($authors as $author)
     <tr>
-        <td>{{$author->getDetail()}}</td>
+        <td>
+            {{$author->getDetail()}}
+        </td>
     </tr>
     @endforeach
 </table>
+{{ $authors->links() }}
 @endsection
